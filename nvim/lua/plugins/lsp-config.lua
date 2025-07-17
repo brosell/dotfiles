@@ -41,6 +41,8 @@ return {
       vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
       vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
+      
+      vim.keymap.set("v", "qf", vim.lsp.buf.format, { remap = false })
     end,
   },
 }
