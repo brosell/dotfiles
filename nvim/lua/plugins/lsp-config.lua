@@ -21,7 +21,14 @@ return {
 
       local lspconfig = require("lspconfig")
       lspconfig.ts_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+				settings = {
+					typescript = {
+						preferences = {
+							importModuleSpecifier = "relative"
+						}
+					}
+				}
       })
       lspconfig.solargraph.setup({
         capabilities = capabilities
