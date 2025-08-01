@@ -17,20 +17,41 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
+
+			local border = {
+				{ '┌', 'FloatBorder' },
+				{ '─', 'FloatBorder' },
+				{ '┐', 'FloatBorder' },
+				{ '│', 'FloatBorder' },
+				{ '┘', 'FloatBorder' },
+				{ '─', 'FloatBorder' },
+				{ '└', 'FloatBorder' },
+				{ '│', 'FloatBorder' },
+			}
+
+			-- Add the border on hover and on signature help popup window
+			local handlers = {
+				['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+				['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+			}
+
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       local lspconfig = require("lspconfig")
       lspconfig.ts_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+				handlers = handlers,
       })
       lspconfig.solargraph.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
       })
       lspconfig.html.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+				handlers = handlers,
       })
       lspconfig.lua_ls.setup({
-        capabilities = capabilities
+        capabilities = capabilities,
+				handlers = handlers,
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
@@ -43,6 +64,14 @@ return {
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
       
       vim.keymap.set("v", "qf", vim.lsp.buf.format, { remap = false })
-    end,
+
+			-- Add border to the diagnostic popup window
+			vim.diagnostic.config({
+				virtual_text = {
+					prefix = '■ ', -- Could be '●', '▎', 'x', '■', , 
+				},
+				float = { border = border },
+			})
+		end,
   },
 }
