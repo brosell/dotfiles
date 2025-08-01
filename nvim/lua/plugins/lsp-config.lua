@@ -72,6 +72,7 @@ return {
 
 			vim.keymap.set("v", "qf", vim.lsp.buf.format, { remap = false })
 
+			vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { remap = false })
 			-- Add border to the diagnostic popup window
 			vim.diagnostic.config({
 				virtual_text = {
@@ -81,4 +82,8 @@ return {
 			})
 		end,
 	},
+	{
+		"williamboman/mason.nvim",
+		lazy = false,
+	}
 }

@@ -1,11 +1,9 @@
--- Set up auto indent behavior to always match the existing file
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-vim.opt.copyindent = true
+-- default indent (fallback)
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.expandtab = true
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 0
-vim.opt.expandtab = false
 vim.opt.wrap = false
 
 vim.opt.cursorline = true
