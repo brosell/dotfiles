@@ -3,12 +3,21 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.copyindent = true
 
-vim.opt.tabstop = 2
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = false
 vim.opt.wrap = false
 
 vim.opt.cursorline = true
+
+-- Enhanced cursorline highlight override after theme load
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "CursorLine", { bg = "#383c44" })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#383c44", fg = "#ffffff", bold = true })
+  end,
+})
 
 vim.g.mapleader = " "
 vim.g.background = "light"
