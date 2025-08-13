@@ -5,9 +5,15 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.5",
-    dependencies = { 
+    dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim" ,
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+      },
     },
     config = function()
       local function filenameFirst(_, path)
@@ -45,10 +51,12 @@ return {
       vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
       vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, {})
       vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-      vim.keymap.set("n", "<leader>fg", builtin.git_files, {})
+      -- vim.keymap.set("n", "<leader>fg", builtin.git_files, {})
       vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, {})
+      vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
       require("telescope").load_extension("ui-select")
+      require("telescope").load_extension("live_grep_args")
     end,
   },
 }
