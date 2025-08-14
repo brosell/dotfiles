@@ -26,6 +26,9 @@ vim.g.background = "light"
 
 vim.opt.swapfile = false
 
+-- copy to xclip to windows clipboard
+vim.keymap.set('v', '<leader>yx', ':w !xclip -selection clipboard<CR>', { noremap = true, silent = true })
+
 -- Navigate vim panes better
 vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
 vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
@@ -142,7 +145,7 @@ end
 
 -- Key mappings
 vim.keymap.set("n", "<leader>t", FloatingTerminal, { noremap = true, silent = true, desc = "Toggle floating terminal" })
-vim.keymap.set("t", "<Esc>", function()
+vim.keymap.set("t", "<Esc><Esc>", function()
   if terminal_state.is_open then
     vim.api.nvim_win_close(terminal_state.win, false)
     terminal_state.is_open = false
