@@ -7,10 +7,12 @@ return {
         decrement = '<C-x>'
       },
       -- User defined loops
-      -- additions = {
-      --   {'Foo', 'Bar'},
-      --   {'tic', 'tac', 'toe'}
-      -- },
+      additions = {
+        {'public', 'private', 'protected'},
+        {'describe', 'fdescribe', 'xdescribe'},
+        {'it', 'xit', 'fit'},
+        {'let', 'const'},
+      },
       -- allow_caps_additions = {
       --   {'enable', 'disable'}
       --   -- enable → disable

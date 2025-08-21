@@ -68,7 +68,7 @@ return {
 			vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 			vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 			vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
-			vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
+			-- vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr })
 
 			vim.keymap.set("v", "qf", vim.lsp.buf.format, { remap = false })
 
@@ -80,10 +80,15 @@ return {
 				},
 				float = { border = border },
 			})
+
+			-- K - hover with border, not focusable
+			vim.api.nvim_create_autocmd('LspAttach', {
+				callback = function(args)
+					vim.keymap.set('n', 'K', function()
+						vim.lsp.buf.hover({border="single", focusable=false})
+					end, {desc="lsp hover", buffer=args.buf})
+					-- more keymaps here
+				end})
 		end,
 	},
-	{
-		"williamboman/mason.nvim",
-		lazy = false,
-	}
 }
