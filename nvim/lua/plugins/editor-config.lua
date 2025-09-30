@@ -26,6 +26,10 @@ return {
  --      end, { desc = "Format buffer via LSP", silent = true })	
     end,
   },
+  {
+    "tpope/vim-surround",
+    lazy = false,
+  }
 }
 
 
