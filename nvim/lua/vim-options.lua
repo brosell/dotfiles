@@ -21,6 +21,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end,
 })
 
+vim.g.blamer_min_offset_column = 100
+
 vim.g.mapleader = " "
 vim.g.background = "light"
 

@@ -12,9 +12,9 @@ return {
     end
   },
   {
-    "APZelos/blamer.nvim",
+    "brosell/blamer.nvim",
+    branch = "feat/add-min-col-offset",
     config = function()
-
     end;
   },
 }
