@@ -12,22 +12,16 @@ vim.opt.colorcolumn = "100"                        -- Show column at 100 charact
 vim.opt.scrolloff = 10                             -- Keep 10 lines above/below cursor 
 vim.opt.sidescrolloff = 8                          -- Keep 8 columns left/right of cursor
 
--- Enhanced cursorline highlight override after theme load
-vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = function()
-        vim.api.nvim_set_hl(0, "CursorLine", { bg = "#383c44" })
-        vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#383c44", fg = "#ffffff", bold = true })
-    end,
-})
-
 vim.g.blamer_min_offset_column = 100
+vim.g.blamer_date_format = '%Y-%m-%d'
 
 vim.g.mapleader = " "
 vim.g.background = "light"
 
 vim.opt.swapfile = false
 
+-- use system clipboard by default
+vim.opt.clipboard = "unnamedplus"
 -- copy to xclip to windows clipboard
 vim.keymap.set('v', '<leader>yx', ':w !xclip -selection clipboard<CR>', { noremap = true, silent = true })
 
@@ -45,6 +39,7 @@ vim.opt.splitright = true                          -- Vertical splits go right
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 3
 
+-- clear highlight
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 
