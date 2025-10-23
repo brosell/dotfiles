@@ -6,7 +6,23 @@ vim.opt.expandtab = true
 
 vim.opt.wrap = false
 
+-- Cursorline only in active window
 vim.opt.cursorline = true
+
+-- Auto commands for cursorline management
+vim.api.nvim_create_augroup("CursorLineOnlyInActiveWindow", { clear = true })
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
+  group = "CursorLineOnlyInActiveWindow",
+  callback = function()
+    vim.opt_local.cursorline = true
+  end,
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = "CursorLineOnlyInActiveWindow", 
+  callback = function()
+    vim.opt_local.cursorline = false
+  end,
+})
 vim.opt.colorcolumn = "100"                        -- Show column at 100 characters
 
 vim.opt.scrolloff = 10                             -- Keep 10 lines above/below cursor 
