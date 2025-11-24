@@ -47,6 +47,14 @@ vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
 vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
 vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
+-- natural cursor movement when wrapped
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', '<Down>', 'gj')
+vim.keymap.set('n', '<Up>', 'gk')
+vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('i', '<Down>', '<C-o>gj')
+vim.keymap.set('i', '<Up>', '<C-o>gk')
+
 -- Split behavior
 vim.opt.splitbelow = false                          -- Horizontal splits go below
 vim.opt.splitright = true                          -- Vertical splits go right
@@ -63,6 +71,16 @@ vim.wo.number = true
 vim.opt.foldmethod = "expr"                             -- Use expression for folding
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
 vim.opt.foldlevel = 99                                  -- Start with all folds open
+
+-- Spelling
+vim.opt.spell = true
+vim.keymap.set('n', '<C-z>', 'z=1<CR>', {desc='Fix spelling'})
+vim.opt.spelloptions:append("camel")
+
+-- Markdown table format shortcut
+-- map <Leader>| in visual mode to format the selection as a table
+vim.keymap.set('v', '<Leader>|', ":!column -t -s '|' -o '|'<CR>", { desc = "Format Markdown Table with column" })
+
 
 -- ============================================================================
 -- FLOATING TERMINAL
