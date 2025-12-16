@@ -29,3 +29,10 @@ vim.api.nvim_create_autocmd({'FileChangedShellPost'}, {
   command = "echohl WarningMsg | echo 'File changed on disk. Buffer reloaded.' | echohl None",
 })
 
+function SetTabName(name)
+  vim.t.tab_name = name
+end
+
+vim.api.nvim_create_user_command('Tabname', function(opts)
+  SetTabName(opts.args)
+end, { nargs = 1 })
