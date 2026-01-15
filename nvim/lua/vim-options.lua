@@ -79,6 +79,7 @@ vim.opt.spelloptions:append("camel")
 
 -- Markdown table format shortcut
 -- map <Leader>| in visual mode to format the selection as a table
+-- requires `apt install bsdmainutils`
 vim.keymap.set('v', '<Leader>|', ":!column -t -s '|' -o '|'<CR>", { desc = "Format Markdown Table with column" })
 
 
