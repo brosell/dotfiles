@@ -68,9 +68,19 @@ vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
 
 -- Folding settings
-vim.opt.foldmethod = "expr"                             -- Use expression for folding
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
-vim.opt.foldlevel = 99                                  -- Start with all folds open
+-- Set folding globally
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99  -- Start with all folds open
+
+-- Also set window-local options to ensure they're applied
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  pattern = '*',
+  callback = function()
+    vim.wo.foldmethod = 'expr'
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+  end,
+})
 
 -- Spelling
 vim.opt.spell = true
