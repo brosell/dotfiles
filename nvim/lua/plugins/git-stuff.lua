@@ -18,7 +18,8 @@ return {
         end;
     },
     {
-        "esmuellert/vscode-diff.nvim",
+        -- https://github.com/esmuellert/codediff.nvim
+        "esmuellert/codediff.nvim",
         dependencies = { "MunifTanjim/nui.nvim" },
         cmd = { "CodeDiff", "DiffO" },
         config = function()
