@@ -15,7 +15,30 @@ return {
       auto_open_panel = true,
 
       -- custom session name: nil = timestamp, string = fixed name, function = called to get name
-      session_name = nil,
+      session_name = function()
+        -- Get current directory name
+        local root = vim.fn.getcwd()
+        local pwd = vim.fn.fnamemodify(root, ":t")
+
+        -- Try to get git branch name
+        local branch = ""
+        local handle = io.popen("git rev-parse --abbrev-ref HEAD 2>/dev/null")
+        if handle then
+          branch = handle:read("*a"):gsub("%s+", "")
+          handle:close()
+        end
+
+        -- Build name: pwd_branch or just pwd
+        local name = pwd
+        if branch ~= "" then
+          name = pwd .. "_" .. branch
+        end
+
+        -- Sanitize: replace problematic characters with hyphens
+        -- Replace: / \ : * ? " < > | and spaces
+        name = name:gsub("[/\\:*?\"<>| ]", "-")
+        return name
+      end,
 
       -- show vim.notify messages
       notify = true,
@@ -23,9 +46,9 @@ return {
       -- keybindings
       keys = {
         annotate = "<leader>ma",       -- visual mode
-        start_session = "<leader>ms",  -- normal mode
-        stop_session = "<leader>mq",   -- normal mode
-        toggle_window = "<leader>mw",  -- normal mode
+        -- start_session = "<leader>ms",  -- normal mode
+        -- stop_session = "<leader>mq",   -- normal mode
+        -- toggle_window = "<leader>mw",  -- normal mode
       },
 
       -- side panel
