@@ -5,6 +5,7 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 
 vim.opt.wrap = false
+vim.opt.timeoutlen = 300
 
 -- Cursorline only in active window
 vim.opt.cursorline = true
@@ -24,6 +25,16 @@ vim.api.nvim_create_autocmd("WinLeave", {
   end,
 })
 vim.opt.colorcolumn = "100"                        -- Show column at 100 characters
+
+-- Markdown: enable wrapping for prose
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true
+        vim.opt_local.colorcolumn = ""
+    end,
+})
 
 vim.opt.scrolloff = 10                             -- Keep 10 lines above/below cursor 
 vim.opt.sidescrolloff = 8                          -- Keep 8 columns left/right of cursor
