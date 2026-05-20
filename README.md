@@ -159,6 +159,9 @@ Uses **lazy.nvim** which auto-installs on first launch. All plugins are lazy-loa
 | `:DiffO` | Diff against merge-base with main |
 | `:DBUI` | Open database UI |
 
+- mariadb://[user[:password]@][host][:port]/[database]
+  - !! database not required
+
 #### Value Toggling (boole.nvim)
 Ctrl+a/x cycles through custom values:
 - `public` → `private` → `protected`
