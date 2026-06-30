@@ -5,6 +5,7 @@ return {
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter").setup()
+      require("nvim-treesitter").install({ "typescript", "tsx", "javascript" })
     end
   }
 }
