@@ -1,9 +1,23 @@
 #!/usr/bin/env bash
 # Sets up Neovim + tmux from https://github.com/brosell/dotfiles (Ubuntu/Debian).
-# Safe to re-run. Options:
-#   --no-ruby     skip Ruby + rubocop/erb_lint/solargraph
-#   --no-deps     skip apt/npm/gem installs (just link configs + install plugins)
+#
+#   curl -fsSL https://raw.githubusercontent.com/brosell/dotfiles/main/setup-dotfiles.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/brosell/dotfiles/main/setup-dotfiles.sh | bash -s -- --no-ruby
 set -euo pipefail
+
+# Everything lives in main(), invoked on the last line, so that when piped into
+# bash the whole script is read before anything runs (and children reading
+# stdin can't swallow the rest of it).
+main() {
+
+usage() {
+  cat <<'EOF'
+Usage: setup-dotfiles.sh [--no-ruby] [--no-deps]
+Safe to re-run.
+  --no-ruby     skip Ruby + rubocop/erb_lint/solargraph
+  --no-deps     skip apt/npm/gem installs (just link configs + install plugins)
+EOF
+}
 
 REPO_URL="${DOTFILES_REPO:-https://github.com/brosell/dotfiles.git}"
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
@@ -15,8 +29,8 @@ for arg in "$@"; do
   case "$arg" in
     --no-ruby) WITH_RUBY=0 ;;
     --no-deps) WITH_DEPS=0 ;;
-    -h|--help) sed -n '2,6p' "$0"; exit 0 ;;
-    *) echo "Unknown option: $arg" >&2; exit 1 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown option: $arg" >&2; usage >&2; exit 1 ;;
   esac
 done
 
@@ -134,3 +148,6 @@ Next steps:
   * Start tmux and nvim; run :checkhealth in nvim if anything looks off.
   * Make sure ~/.local/bin is on your PATH (for `fd`).
 EOF
+}
+
+main "$@"

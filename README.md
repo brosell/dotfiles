@@ -8,6 +8,29 @@ This repository contains a modern, feature-rich development setup with:
 - **Neovim** - Configured with lazy.nvim, LSP, Treesitter, and 30+ plugins
 - **Tmux** - Dracula theme, vim integration, and sensible defaults
 
+## Quick Start
+
+On Ubuntu/Debian, one command installs everything (dependencies, configs, plugins, Treesitter parsers, and LSP servers):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/brosell/dotfiles/main/setup-dotfiles.sh | bash
+```
+
+Pass options with `bash -s --`:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/brosell/dotfiles/main/setup-dotfiles.sh | bash -s -- --no-ruby
+```
+
+| Option | Effect |
+|--------|--------|
+| `--no-ruby` | Skip Ruby, rubocop, erb_lint, and solargraph |
+| `--no-deps` | Skip apt/npm/gem installs; only link configs and install plugins |
+
+The script clones this repo to `~/dotfiles` (override with `DOTFILES_DIR`), symlinks `~/.config/nvim` and `~/.config/tmux` (backing up anything already there), and is safe to re-run to update. Afterwards, set a [Nerd Font](https://www.nerdfonts.com/) in your terminal.
+
+For other platforms or a manual install, see [Setup](#setup).
+
 ---
 
 ## Neovim Configuration
@@ -218,6 +241,8 @@ Uses **TPM** (Tmux Plugin Manager) which auto-installs on first launch.
 ---
 
 ## Setup
+
+The [Quick Start](#quick-start) script automates everything below. Use these steps for a manual install or on non-Debian systems.
 
 ### Prerequisites
 
